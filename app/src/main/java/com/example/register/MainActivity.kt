@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 lateinit var Email: TextView
 lateinit var firstname: TextView
@@ -28,12 +29,22 @@ class MainActivity : AppCompatActivity() {
         Registerbutton = findViewById(R.id.Registerbutton)
         alreadyregister = findViewById(R.id.alreadyregister)
 
-        val firstname = intent?.extras?.getString("NAME", "")
 
 
         Registerbutton.setOnClickListener {
+            if(Email.text.toString() != "" && firstname.text.toString() != "" && Password.text.toString() != "" && lastname.text.toString() != "" && Username.text.toString() != ""){
+
+                var intent = Intent(this, MainActivity2::class.java)
+            var name : String =  Username.text.toString()
+            intent.putExtra("NAME", name)
+            startActivity(intent)
+        }
+        else {
+            Toast.makeText(this, "გთხოვთ შეავსოთ ყველა ველი", Toast.LENGTH_SHORT).show()
+        }
+        alreadyregister.setOnClickListener{
             var intent = Intent(this, MainActivity2::class.java)
-            intent.putExtra("NAME", firstname)
+            startActivity(intent)
         }
     }
-}
+}}
